@@ -32,4 +32,13 @@ jobs:
           
       - name: Push Frontend Docker Image
         run: |
-          docker push abdullahkhan203/mern-frontend:latest                  
+          docker push abdullahkhan203/mern-frontend:latest 
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Connected to EC2 successfully!"                     
